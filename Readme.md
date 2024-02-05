@@ -35,11 +35,11 @@ Animox.js simplifies the process of bringing everyday cool effects into your web
 To use Animox.js in your project, you can include it in your HTML file via a CDN.
 
 ```html
-<link rel="stylesheet" href="Animox.css" />
+<link rel="stylesheet" href="https://unpkg.com/animoxjs@1.0.0/dist/AnimoxMinified.css">
 ```
 
 ```html
-<script type="text/javascript" src="Animox.js"></script>
+<script type="text/javascript" src="https://unpkg.com/animoxjs@1.0.0/dist/AnimoxMinified.js"></script>
 ```
 
 ## Getting Started
@@ -118,6 +118,8 @@ These helps in ease of including locomotive and scrollTrigger together and Lenis
 <!-- Add this files in same order for the proper working of the Animox library -->
 
 <!-- for including locomotive and scrollTrigger along first include this libraries -->
+<!-- Animox Js -->
+<script type="text/javascript" src="https://unpkg.com/animoxjs@1.0.0/dist/AnimoxMinified.js"></script>
 <!--  Locomotive is needed for Scrolling Effects -->
  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script> 
 <!--  Gsap is needed for Basic Effects -->
