@@ -126,7 +126,8 @@ These helps in ease of including locomotive and scrollTrigger together and Lenis
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <!-- Scroll Trigger is needed for Scroll Effects -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
+```
+```html
 <!-- for including Lenis and Gsap along first include this libraries -->
 <!--  Lenis is needed for Scrolling Effects -->
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script> 
