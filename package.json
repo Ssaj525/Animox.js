@@ -1,0 +1,22 @@
+{
+  "name": "animoxjs",
+  "version": "1.0.0",
+  "description": "it is an library that helps in your easing the web development effects and animations",
+  "main": "src/Animox.js",
+  "scripts": {
+    "build": "webpack --config bundler/webpack.config.js"
+  },
+  "author": "@Animox(SAJ)",
+  "license": "ISC",
+  "dependencies": {
+    "css": "^3.0.0",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "gsap": "^3.12.4",
+    "loader": "^2.1.1"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "style": "src/Animox.css"
+}
