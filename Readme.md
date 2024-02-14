@@ -41,11 +41,11 @@ Animox.js simplifies the process of bringing everyday cool effects into your web
 To use Animox.js in your project, you can include it in your HTML file via a CDN.
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/animoxjs@1.0.0/dist/Animox.min.css">
+<link rel="stylesheet" href="https://unpkg.com/animoxjs@1.0.3/dist/Animox.min.css">
 ```
 
 ```html
-<script type="text/javascript" src="https://unpkg.com/animoxjs@1.0.0/dist/Animox.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/animoxjs@1.0.3/dist/Animox.min.js"></script>
 ```
 
 ## Getting Started
