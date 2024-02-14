@@ -1,13 +1,19 @@
 {
   "name": "animoxjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "it is an library that helps in your easing the web development effects and animations",
   "main": "src/Animox.js",
   "scripts": {
     "build": "webpack --config bundler/webpack.config.js"
   },
   "author": "@Animox(SAJ)",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ssaj525/Animox.js"
+  },
+  "keywords": ["javascript", "library", "web-development", "web-effects"],
+  "homepage": "https://github.com/Ssaj525/Animox.js",
   "dependencies": {
     "css": "^3.0.0",
     "css-minimizer-webpack-plugin": "^5.0.1",
