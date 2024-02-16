@@ -41,11 +41,11 @@ Animox.js simplifies the process of bringing everyday cool effects into your web
 To use Animox.js in your project, you can include it in your HTML file via a CDN.
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/animoxjs@1.0.3/dist/Animox.min.css">
+<link rel="stylesheet" href="https://unpkg.com/animoxjs@1.0.4/dist/Animox.min.css">
 ```
 
 ```html
-<script type="text/javascript" src="https://unpkg.com/animoxjs@1.0.3/dist/Animox.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/animoxjs@1.0.4/dist/Animox.min.js"></script>
 ```
 
 ## Getting Started
@@ -54,9 +54,8 @@ Once you have included Animox.js in your project, you can start using its effect
 
 ```javascript
 // Example code to initialize Animox.js and use the cool effects.
-// use $ for queryselector and _ for queryselectorAll
+// use $ for queryselector
 $(".cursor").MouseFollower();
-_(".container h1").TextEffect();
 ```
 
 ### Required Libraries
@@ -100,9 +99,12 @@ $(".box").Magnet({
 The text Effect animates text with cool animation , with many different animations.
 
 ```javascript
-_(".container h1").TextEffect({
-  //Parameters are optional.
-  style: 3, //(1 to 9)
+//style 1
+let Text = document.querySelector(".text h2"); // for single element
+let MText = document.querySelectorAll(".text h2"); // for multiple Elements
+
+TextEffect(MText, {
+    style: 1, // or any other style you want to apply
 });
 ```
 
@@ -126,7 +128,7 @@ These helps in ease of including locomotive and scrollTrigger together and Lenis
 
 <!-- for including locomotive and scrollTrigger along first include this libraries -->
 <!-- Animox Js -->
-<script type="text/javascript" src="https://unpkg.com/animoxjs@1.0.0/dist/AnimoxMinified.js"></script>
+<script type="text/javascript" src="https://unpkg.com/animoxjs@1.0.4/dist/Animox.min.js"></script>
 
 <!--  Locomotive is needed for Scrolling Effects -->
  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script> 
@@ -138,7 +140,7 @@ These helps in ease of including locomotive and scrollTrigger together and Lenis
 ```html
 <!-- for including Lenis and Gsap along first include this libraries -->
 <!-- Animox Js -->
-<script type="text/javascript" src="https://unpkg.com/animoxjs@1.0.0/dist/AnimoxMinified.js"></script>
+<script type="text/javascript" src="https://unpkg.com/animoxjs@1.0.4/dist/Animox.min.js"></script>
 
 <!--  Gsap is needed for Basic Effects -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -184,12 +186,14 @@ $(".scrollTop").ScrolltoTop({
 This feature helps you to add underline effects for the selected element. 
 
 ```javascript
-_(".container h1").HoverEffect({
-    //parameters are optionals
-    style: 2, //(1 to 2)
-    effect: "left" // it is only applicable for style two (i.e, center, right, bottom)
-}
-);
+let button = document.querySelector(".navbar ul li");
+
+let Mbutton = document.querySelectorAll(".navbar ul li");
+
+HoverEffect(Mbutton, {
+    style:2,
+    effect: "left",
+});
 ```
 ## OnHoverExpand Effect
 
@@ -226,8 +230,6 @@ This feature helps you to toggle from Dark Mode to Light Mode.
 This feature helps you to add Image trail effects for the selected element(it should be either body or a container). 
 
 ```javascript
-$(".main").ImageTrail();
-
 const images = [
     'Enter your pictures source or urls here',
     './imgs/people.jpg',
@@ -237,6 +239,8 @@ const images = [
     'https://plus.unsplash.com/premium_photo-1707227792423-def236793f48?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0N3x8fGVufDB8fHx8fA%3D%3D',
     'https://images.unsplash.com/photo-1706354924653-eab4b40d7cc6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2MHx8fGVufDB8fHx8fA%3D%3D',
 ];
+
+$(".main").ImageTrail();
 ```
 ## InfiniteCarousel Effect
 

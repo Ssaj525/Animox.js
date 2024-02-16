@@ -1,6 +1,6 @@
 {
   "name": "animoxjs",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "it is an library that helps in your easing the web development effects and animations",
   "main": "src/Animox.js",
   "scripts": {
