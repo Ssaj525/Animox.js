@@ -18,7 +18,6 @@
   top: 50%;
   left: 50%;
   z-index: 99999;
-  background-color: royalblue;
   mix-blend-mode: difference;
   transform: translate(-50%,-50%);
   }   
@@ -39,6 +38,7 @@
     
     #behindmouse {
       background-color: white;
+      z-index: 9999;
     }
     /* MouseFollower case3 */
     .c{
@@ -104,19 +104,12 @@ body #cid, body .cc3 {
       filter: blur(200px);
     }
     
-    .blur {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      z-index: 999;
-      filter: blur(200px);
-    }
 /* MouseFollower case7 */
     body .c5 {
       position: fixed;
-      height: 40px;
-      width: 40px;
-      border: 1px solid #fff;
+      height: 35px;
+      width: 35px;
+      border: 1px solid #000;
       border-radius: 100%;
       top: -20px;
       pointer-events: none;
@@ -139,7 +132,7 @@ body #cid, body .cc3 {
       letter-spacing: 0.1em;
       border-radius: 25px;
       color: #fff;
-      transition: transform 0.1s;
+      transition: all 0.3s ease;
       text-decoration: none;
     }
     body .Mbtn:hover span {
@@ -172,6 +165,7 @@ body #cid, body .cc3 {
     body .sticky{
       width: 100%;
       height: 30px;
+      padding: 15px 10px;
       background-color: transparent;
       position: fixed;
       color: #000;
@@ -181,6 +175,21 @@ body #cid, body .cc3 {
     }
 /* scrollToTop case1 */
     .stt {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #333;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      text-transform: uppercase;
+      text-align: center;
+      outline: none;
+    }
+    .stt2 {
       display: none;
       position: fixed;
       bottom: 20px;
@@ -258,15 +267,15 @@ body #cid, body .cc3 {
     /*OnHover Expand*/
     .ECircle{
       background-color: var(--bgColor);
-      width: 23px;
-      height: 23px;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       position: fixed;
       pointer-events: none;
       top: 50%;
-      left: 50%;
-      z-index: 99999;
-      background-color: crimson;
+      left: 50%;  
+      transition: all 0.20s;
+      z-index: 9999999;
       mix-blend-mode: difference;
       transform: translate(-50%,-50%);
       }   
@@ -326,13 +335,15 @@ body #cid, body .cc3 {
   }
 }
 /*TextEffect case1*/
-.textEffects{
-  font-size: 55px;
+.textEffects .char {
+  font-size: 25px;
   font-family: sans-serif;
   text-transform: uppercase;
+  color: #000;
   cursor: pointer;
-  opacity: 0;
+  opacity: 0; /* Set opacity to 1 to make characters visible */
 }
+
 
 * body .rolling-text {
   display: inline-block;
@@ -414,6 +425,7 @@ body #cid, body .cc3 {
 body .txt-line {
   overflow: hidden;
   margin-top: 20px;
+  margin-bottom: 0px;
 }
 body .txt-line p {
   font-size: 30px;
@@ -432,57 +444,68 @@ body .TE5 p {
   background-size: 200% 100%;
   background-position-x: 100%;
   background-clip: text;
+  font-size: 4vw;
   -webkit-background-clip: text;
   margin-left: 50px;
 }
 /*TextEffect case6*/
-body .TE6 {
+.TE6 {
   text-transform: uppercase;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: #ccc;
   font-size: 2vw;
   cursor: pointer;
+  position: relative;
+  white-space: nowrap; /* Ensure text remains in a single line */
 }
-body .TE6:hover:before {
+
+.TE6:hover:before {
   width: 100%;
+  font-size: 100%; /* Adjust font size when hovered */
+  transition: all 1.3s;
 }
-body .TE6:before {
+
+.TE6:before {
   content: attr(data-text);
   position: absolute;
   top: 0;
   left: 0;
+  flex-wrap: nowrap;
   color: #262626;
   width: 0%;
   overflow: hidden;
-  transition: 1s;
+  transition: 1.3s;
 }
+
 /*TextEffect case7*/
 body .TE7C {
   margin: 0;
   padding: 0;
-  display: flex;
+  display: inline-block; /* Change to inline-block to prevent full width */
 }
-body .TE7C:hover .TE7 {
-  animation: animate 2s linear infinite;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
+
 body .TE7C .TE7 {
   color: #000;
   font-family: sans-serif;
   font-size: 2vw;
   font-weight: 600;
+  letter-spacing: 3px; /* Adjust letter spacing */
   transition: all 0.3s ease;
-  letter-spacing: 10px;
 }
+
+body .TE7C:hover .TE7 {
+  animation: animate 2s linear infinite;
+  cursor: pointer;
+}
+
 @keyframes animate {
   0% {
-    transform: rotate(0deg) translateY(0px);
+    transform: rotate(0deg) translateY(0%);
     opacity: 1;
     filter: blur(1px);
   }
   100% {
-    transform: rotate(45deg) translateY(-200px);
+    transform: rotate(45deg) translateY(-50%);
     opacity: 0;
     filter: blur(20px);
   }
@@ -617,18 +640,25 @@ body .TE7C .TE7 {
   background-position: center;
 }
 
-.arrow {
+#prevBtn, #nextBtn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   width: 50px;
   height: 50px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(20, 20, 20, 0.5);
   color: white;
+  border-radius: 50%;
   text-align: center;
+  outline: none;
+  border: none;
+  font-size: 1.2vw;
   line-height: 50px;
   cursor: pointer;
   z-index: 1;
+}
+#nextBtn{
+  right: 0;
 }
 
 .arrow.left {

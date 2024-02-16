@@ -1,6 +1,6 @@
 // Animox.js: Convert Your Long Javascript Code to One Liner 
 
-// Theme Toggler (from light to dark and vice versa)✅
+// Theme Toggler (from light to dark and vice versa)✅✅
 var ThemeToggler = (function() {
     // Private variables
     var elements = {};
@@ -86,12 +86,283 @@ var ThemeToggler = (function() {
         Mode: Mode
     };
 })();
-// QuerySelector
+//Hover Effects ✅✅
+function HoverEffect(elements, opts = {}) {
+    switch (opts.style || 1) {
+        case 1:
+            function FirstEffect(element) {
+                element.classList.add("btnE1");
+                element.classList.add("btnM1");
+                if (opts.bgColor || opts.color || opts.width || opts.height) {
+                    element.style.backgroundColor = opts.bgColor;
+                    element.style.color = opts.color;
+                    element.style.width = opts.width;
+                    element.style.height = opts.height;
+                }
+            }
+
+            elements.forEach(FirstEffect);
+            break;
+        case 2:
+            function SecondEffect(element) {
+                element.classList.add("btnE5");
+                if (opts.style == 2) {
+                    switch (opts.effect || "center") {
+                        case "center":
+                            element.classList.add("btn-center");
+                            break;
+                        case "left":
+                            element.classList.add("btn-left");
+                            break;
+                        case "right":
+                            element.classList.add("btn-right");
+                            break;
+                        case "bottom":
+                            element.classList.add("btn-bottom");
+                            break;
+                    }
+                }
+            }
+
+            elements.forEach(SecondEffect);
+            break;
+        default:
+            console.warn("Animox Js : no such style available for Hover Effect, mentioned in HoverEffect()");
+    }
+} 
+// checking before applying Text Effects ✅✅
+function TextEffect(elements, opts = {}) {
+    if (!elements) return;
+
+    if (elements instanceof NodeList) {
+        elements.forEach(element => {
+            applyEffect(element, opts);
+        });
+    } else if (elements instanceof HTMLElement) {
+        applyEffect(elements, opts);
+    } else if (typeof elements === 'string') {
+        const nodeList = document.querySelectorAll(elements);
+        nodeList.forEach(element => {
+            applyEffect(element, opts);
+        });
+    } else {
+        console.error('Invalid input. Please provide valid HTMLElement, NodeList, or selector string.');
+    }
+}
+//Text Effects only✅✅
+function applyEffect(element, opts) {
+    let textContainer; // Declare textContainer here
+
+    switch (opts.style || 1) {
+            case 1:
+            // FirstEffect
+            element.classList.add("rolling-text");
+
+            let innerText = element.innerText;
+            element.innerHTML = "";
+
+            textContainer = document.createElement("div"); // Initialize textContainer here
+            textContainer.classList.add("block");
+
+            for (let letter of innerText) {
+                let span = document.createElement("span");
+                span.innerText = letter.trim() === "" ? "\xa0" : letter;
+                span.classList.add("letter");
+                textContainer.appendChild(span);
+            }
+
+            element.appendChild(textContainer);
+            element.appendChild(textContainer.cloneNode(true));
+
+            element.addEventListener("mouseover", () => {
+                element.classList.remove("play");
+            });
+            break;
+            case 2:
+                // SecondEffect
+                element.classList.add("magic");
+                break;
+            case 3:
+                // ThirdEffect
+                if (opts.fontFamily || opts.fontSize || opts.TextTransform) {
+                    element.style.fontSize = opts.fontSize;
+                    element.style.fontFamily = opts.fontFamily;
+                    element.style.textTransform = opts.TextTransform;
+                }
+            
+                const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                element.classList.add("JText");
+                element.dataset.value = element.innerText; // Set value attribute to the inner text
+                element.onmouseover = event => {
+                    let iterations = 0;
+                    const interval = setInterval(() => {
+                        event.target.innerText = event.target.innerText.split("").map((letter, index) => {
+                            if (index < iterations) {
+                                return event.target.dataset.value[index];
+                            }
+                            return letters[Math.floor(Math.random() * 26)];
+                        }).join("");
+                        if (iterations >= event.target.dataset.value.length) {
+                            clearInterval(interval);
+                        }
+                        iterations += 1 / 3;
+                    }, 100);
+                };
+                break;
+            case 4:
+    // FourthEffect
+    element.classList.add("txt-line");
+
+    // Create a paragraph element
+    const para = document.createElement("p");
+
+    // Transfer text content from the element to the paragraph
+    para.textContent = element.textContent;
+
+    // Append the paragraph to the element
+    element.innerHTML = ""; // Clear the element's content
+    element.appendChild(para);
+
+    // Apply animation to the paragraph tag
+    gsap.from(para, {
+        duration: 1.8,
+        delay: 1,
+        y: 200,
+        skewY: 10,
+        stagger: {
+            amount: 0.4
+        }
+    });
+    break;
+            case 5:
+        // FifthEffect
+        element.classList.add("TE5");
+    
+        // Create a paragraph element
+        const para2 = document.createElement("p");
+    
+        // Transfer text content from the element to the paragraph
+        para2.textContent = element.textContent;
+    
+        // Clear the element's content
+        element.innerHTML = "";
+    
+        // Append the paragraph to the element
+        element.appendChild(para2);
+    
+        // Apply animation to the paragraph tag
+        gsap.to(para2, {
+            backgroundPositionX: "0%",
+            stagger: 1,
+            scrollTrigger: {
+                trigger: ".TE5" || opts.trigger,
+                scrub: 1,
+                start: "top top" || opts.start,
+                end: "bottom top",
+            }
+        });
+        break;
+            case 6:
+            // SixthEffect
+            if (opts.fontSize) {
+                element.style.fontSize = opts.fontSize;
+            }
+            element.classList.add("TE6");
+        
+            // Set data-text attribute to the element
+            element.setAttribute("data-text", element.textContent);
+        
+            break;     
+            case 7:
+                // SeventhEffect
+                if (opts.fontFamily || opts.fontSize || opts.TextTransform) {
+                    element.style.fontSize = opts.fontSize;
+                    element.style.fontFamily = opts.fontFamily;
+                    element.style.textTransform = opts.TextTransform;
+                }
+                element.classList.add("TE7C");
+                textContainer = document.createElement("div");
+                textContainer.classList.add("TE7");
+                textContainer.innerText = element.innerText;
+                element.innerHTML = ""; // Clear the element's content
+                element.appendChild(textContainer);
+                break;          
+            case 8:
+                    // EighthEffect
+                    if (opts.fontFamily || opts.fontSize || opts.TextTransform) {
+                        element.style.fontSize = opts.fontSize;
+                        element.style.fontFamily = opts.fontFamily;
+                        element.style.textTransform = opts.TextTransform;
+                    }
+                    element.classList.add("textEffects");
+                    
+                    // Split the text content into individual characters
+                    const chars = element.textContent.split("");
+                
+                    // Clear the element's content
+                    element.innerHTML = "";
+                
+                    // Iterate over each character and create a span for it
+                    chars.forEach((char, index) => {
+                        const span = document.createElement("span");
+                        span.textContent = char;
+                        span.classList.add("char", `char-${index + 1}`); // Add class names for styling
+                        element.appendChild(span);
+                
+                        // Apply starting position below the element
+                        gsap.set(span, { y: "100%" });
+                
+                        // Apply animation to bring each character up
+                        gsap.to(span, {
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.5,
+                            delay: 0.1 * index, // Stagger the delay for each character
+                            ease: "power2.out" // Use smooth easing function
+                        });
+                    });
+                
+                    break;
+            case 9:
+                        // NinthEffect
+                        if (opts.fontFamily || opts.fontSize || opts.TextTransform) {
+                            element.style.fontSize = opts.fontSize;
+                            element.style.fontFamily = opts.fontFamily;
+                            element.style.textTransform = opts.TextTransform;
+                        }
+                        element.classList.add("typewriter");
+                        const typewriterText = element.textContent;
+                        element.textContent = "";
+                        const chars2 = typewriterText.split("");
+                        chars2.forEach((char, index) => {
+                            const span = document.createElement("span");
+                            span.textContent = char;
+                            span.style.visibility = "hidden";
+                            element.appendChild(span);
+            
+                            gsap.to(span, {
+                                visibility: "visible",
+                                duration: 0.5,
+                                delay: index * 0.1,
+                                onComplete: () => {
+                                    if (index === chars2.length - 1) {
+                                        element.style.borderRight = "none";
+                                    }
+                                }
+                            });
+                        });
+                        break;
+            default:
+            console.warn("Animox Js: no such style available for Text Effects, mentioned in TextEffect()");
+            }
+}
+// QuerySelector✅✅
 function $(selector){
     //passedItem select the element passed by the user
     let passedItem = document.querySelector(selector);
+    let queryPassed = document.querySelectorAll(selector);
 
-    // 1.Mouse Follower with different style✅
+    // 1.Mouse Follower with different style✅✅
     passedItem.MouseFollower = function(opts = {}){
         switch (opts.style || 1) {
             case 1:
@@ -172,10 +443,8 @@ function $(selector){
                     element.classList.add("c");
                     innerCircle = document.createElement("div")
                     innerCircle.classList.add("inner-circle")
-                    if(opts.bgColor){
+                    if(opts.bgColor || opts.border){
                         innerCircle.style.backgroundColor = opts.bgColor;
-                    }
-                    if(opts.border){
                         element.style.border = opts.border;
                     }
                     window.addEventListener("mousemove", function(dets){
@@ -309,6 +578,10 @@ function $(selector){
             case 7:
                 function seventhMouseFollower(element){ 
                     element.classList.add("c5");
+                    const circle = document.querySelector(".c5");
+                    if(opts.border){
+                        circle.style.border = opts.border;
+                    }
                     const mouse = { x: 0, y: 0 };
                     const previousMouse = { x: 0, y: 0 };
                     const circleCoord = { x: 0, y: 0 };
@@ -362,14 +635,17 @@ function $(selector){
           }
    
     }
-    // 2.Magnet Effect✅
+    // 2.Magnet Effect✅✅
     passedItem.Magnet = function(opts = {}){
         switch (opts.style || 1) {
             case 1:
              function MagnetEffect(element) {
             // Add or modify default/Custom styles as needed
-            if(opts.bgColor){
+            if(opts.bgColor || opts.color || opts.fontFamily || opts.fontSize){
                 element.style.backgroundColor = opts.bgColor;
+                element.style.color = opts.color;
+                element.style.fontFamily = opts.fontFamily;
+                element.style.fontSize = opts.fontSize;
             }
             element.classList.add("Mbtn");
             if(opts.width || opts.height){
@@ -398,57 +674,63 @@ function $(selector){
             })
             return element;
              }
-             MagnetEffect(passedItem);
+             queryPassed.forEach(MagnetEffect);
               break
             case 2:
-                function SecondMagnetEffect(element, opts = {}){
-                document.querySelectorAll(element).forEach(function (elem) {
-                 elem.addEventListener("mousemove", function (dets) {
-                        var bcr = elem.getBoundingClientRect()
+                function lerp(a, b, t) {
+                    return a * (1 - t) + b * t;
+                }
+                function SecondMagnetEffect(element) {
+                    if (!element || typeof element.addEventListener !== 'function') {
+                        // Skip invalid elements
+                        return;
+                    }
+                    element.addEventListener("mousemove", function (dets) {
+                        var bcr = element.getBoundingClientRect();
                         var zeroonex = gsap.utils.mapRange(
                             0,
                             bcr.width,
                             0,
                             1,
                             dets.clientX - bcr.left
-                        )
+                        );
                         var zerooney = gsap.utils.mapRange(
                             0,
                             bcr.height,
                             0,
                             1,
                             dets.clientY - bcr.top
-                        )
-
+                        );
+            
                         gsap.to(".mf2", {
                             scale: 4,
                             ease: Power2,
                             duration: 0.5,
-                        })
-
-                        gsap.to(elem, {
+                        });
+            
+                        gsap.to(element, {
                             x: lerp(-20, 20, zeroonex),
                             y: lerp(-20, 20, zerooney),
                             duration: opts.duration || 1,
                             ease: opts.ease || Expo.easeOut,
-                        })
-                        })
-                        elem.addEventListener("mouseleave", function () {
+                        });
+                    });
+                    element.addEventListener("mouseleave", function () {
                         gsap.to(".mf2", {
                             scale: 1,
                             ease: Power2,
                             duration: 0.5,
-                        })
-                        gsap.to(elem, {
+                        });
+                        gsap.to(element, {
                             x: 0,
                             y: 0,
                             duration: opts.duration || 1,
                             ease: opts.ease || Expo.easeOut,
-                        })
-                        })
-                    })
-                    } 
-               SecondMagnetEffect()
+                        });
+                    });
+                }
+                // Apply SecondMagnetEffect to passedItem
+                queryPassed.forEach(SecondMagnetEffect);
               break
             default:
               console.warn(
@@ -456,7 +738,7 @@ function $(selector){
               )
           }
     }
-    // 3.Locomotive & ScrollTrigger & Lenis One line Solution ✅
+    // 3.Locomotive & ScrollTrigger & Lenis One line Solution ✅✅
     passedItem.Scroll = function(opts = {}){
         switch (opts.style || 1) {
             case 1:
@@ -483,28 +765,29 @@ function $(selector){
                 LocoGsap(passedItem);
               break
             case 2:
-                function Lenis(){
-                 // Initialize Lenis
-                const lenis = new Lenis()
-
-                // Register scroll event listeners
-                lenis.on('scroll', (e) => {
-                    console.log(e);
-                })
-
-                function raf(time) {
-                    lenis.raf(time)
-                    requestAnimationFrame(raf)
+                function Lenis() {
+                    // Initialize Lenis
+                    const lenis = this;
+                
+                    // Register scroll event listeners
+                    lenis.on = (eventName, callback) => {
+                        // Your event listener registration logic here
+                    };
+                
+                    function raf(time) {
+                        // Your raf function logic here
+                        requestAnimationFrame(raf);
+                    }
+                
+                    requestAnimationFrame(raf);
                 }
-
-                requestAnimationFrame(raf)
-            }
-              Lenis()
+                // Create a new instance of Lenis
+                const lenisInstance = new Lenis();
               break
             case 3:
                 function Loco(element) {
                     const scroll = new LocomotiveScroll({
-                        el: document.querySelector(element),
+                        el: element,
                         smooth: true
                     });
                     return element;
@@ -518,17 +801,11 @@ function $(selector){
           }
    
     }
-    // 4.Navbar Scroll Effect✅
+    // 4.Navbar Scroll Effect✅✅
     passedItem.StickyNav = function(elem , opts = {}){
         switch (opts.style || 1) {
             case 1:
                 function FirstEffect(element) {
-                    // Add or modify default/Custom styles as needed
-                    if(opts.bgColor || opts.color || opts.height){
-                        element.style.backgroundColor = opts.bgColor;
-                        element.style.color = opts.color;
-                        element.style.height = opts.height;
-                    }
                     window.addEventListener("scroll", ()=>{
                         element.classList.toggle("sticky", window.scrollY > 0)
                     })
@@ -537,22 +814,24 @@ function $(selector){
                   FirstEffect(passedItem);
               break
             case 2:
-                function secondEffect(){
+                function secondEffect(element){
                     window.addEventListener("scroll", ()=>{
                     if(window.scrollY > 0){
                         gsap.to(elem || ".nav",{
                             backgroundColor: "transparent" || opts.bgColor,
                             scrollTrigger:{
-                                trigger: elem || ".page1",
+                                trigger: opts.trigger || ".page1",
                                 scroller: element || ".main",
+                                start: opts.start || "20% 15%",
+                                end: opts.end || "15% top",
                                 scrub:true,
-                                start: "top top",
+                                markers: opts.markers || false
                             }
                         })
                     }
                     });
                     } 
-              secondEffect()
+              secondEffect(passedItem)
               break
             default:
               console.warn(
@@ -561,7 +840,7 @@ function $(selector){
           }
    
     }
-    // 5.ScrollToTop Effect✅
+    // 5.ScrollToTop Effect✅✅
     passedItem.ScrolltoTop = function(opts = {}){
         switch (opts.style || 1) {
             case 1:
@@ -606,7 +885,7 @@ function $(selector){
                     progressBarContainer.appendChild(progressBar);
 
                     window.addEventListener('scroll', function() {
-                        var scrollToTopButton = document.getElementById('stt');
+                        var scrollToTopButton = document.getElementById('stt2');
                         var progressbar = document.querySelector('.pb'); 
 
                         var totalHeight = document.body.scrollHeight - window.innerHeight;
@@ -615,9 +894,9 @@ function $(selector){
 
                         if (!scrollToTopButton) {
                         scrollToTopButton = document.createElement('button');
-                        scrollToTopButton.classList.add('stt');
+                        scrollToTopButton.classList.add('stt2');
                         scrollToTopButton.innerHTML = "&#9650;";
-                        scrollToTopButton.setAttribute('id', 'stt'); 
+                        scrollToTopButton.setAttribute('id', 'stt2'); 
                         document.body.appendChild(scrollToTopButton);
                         }
 
@@ -629,7 +908,7 @@ function $(selector){
                     });
 
                     document.addEventListener('click', function(event) {
-                        if (event.target.classList.contains('stt')) {
+                        if (event.target.classList.contains('stt2')) {
                         window.scrollTo({
                             top: 0,
                             behavior: 'smooth'
@@ -646,7 +925,7 @@ function $(selector){
           }
    
     }
-    // 6.TextSplit One Liner✅
+    // 6.TextSplit One Liner✅✅
     passedItem.TextSplit = function(opts = {}){
         function Splitter(element) {
       const sentenceElement = element;
@@ -673,15 +952,19 @@ function $(selector){
         Splitter(passedItem);
    
     }
-    // 7.Button Hover Effects✅
+    // 7.Button Hover Effects✅✅
     passedItem.BtnHover = function(opts = {}){
         switch (opts.style || 1) {
             case 1:
                 function FirstEffect(element) {
+                    if(opts.bgColor || opts.color){
+                        element.style.backgroundColor = opts.bgColor;
+                        element.style.color = opts.color;
+                    }
                     element.classList.add("btnEffect1");
                     return element;
                     }
-                FirstEffect(passedItem);
+                queryPassed.forEach(FirstEffect);
               break
             case 2:
             function wavyBtn(){
@@ -696,7 +979,7 @@ function $(selector){
           }
    
     }
-    // 8.Image Trail Effects✅
+    // 8.Image Trail Effects✅✅
     passedItem.ImageTrail = function(){
         function Trail(element) {   
             element.classList.add("hero");
@@ -768,36 +1051,32 @@ function $(selector){
         }
         Trail(passedItem);
     }
-    // 9.Expand MouseFollower ✅
+    // 9.Expand MouseFollower ✅✅
     passedItem.onHoverExpand = function(newElem, opts = {}){
         function Expand(element) {
-            // Add or modify default styles on hover as needed for the second elements passed
-            if(opts.bgColor || opts.EbgColor || opts.Ewidth || opts.Eheight){
-                element.style.backgroundColor = opts.bgColor;
-                newElem.style.backgroundColor = opts.EbgColor;
-                newElem.style.width = opts.Ewidth;
-                newElem.style.height = opts.Eheight;
-            }
-
-            let NewElem = opts.target || newElem;
-            element.addEventListener("mouseenter",function(){
-                NewElem.classList.add("ECircle");
+            SElem = document.querySelector(newElem)
+            SElem.addEventListener("mouseenter",function(){
+                if(element.classList.contains('mf')){
+                    element.classList.add("ECircle");
+                }
             })
-            element.addEventListener("mouseleave",function(){
-                element.classList.add("mf");
+            SElem.addEventListener("mouseleave",function(){
+                // element.classList.add("mf");
+                element.classList.remove("ECircle");
+                element.style.transition = "all 0.20s"
             })
             return element;
           }
           Expand(passedItem);
           return passedItem;
     }
-   // 10.Infinite Scroll Effects✅
+   // 10.Infinite Scroll Effects✅✅
    passedItem.InfiniteCarousel = function(opts = {}) {
     switch(opts.style || 1){
         case 1:
-            function ImageScroller(){
+            function ImageScroller(elem){
                 // Create logo scroller
-                   var logoScroller = document.createElement("div");
+                   var logoScroller = elem;
                    logoScroller.classList.add("ls");
                    document.body.appendChild(logoScroller);
        
@@ -838,12 +1117,12 @@ function $(selector){
                        repeat: -1
                    });
                        }
-           ImageScroller();
+           ImageScroller(passedItem);
            break;
         case 2: 
-           function TextScroller(){
+           function TextScroller(elem){
             // Create quote scroller
-              var quoteScroller = document.createElement("div");
+              var quoteScroller = elem;
               quoteScroller.classList.add("q-scroller");
               document.body.appendChild(quoteScroller);
   
@@ -885,7 +1164,7 @@ function $(selector){
                   repeat: -1
               });
                   }
-            TextScroller()
+            TextScroller(passedItem)
             break;
         default:
                 console.warn(
@@ -893,87 +1172,111 @@ function $(selector){
                   )
     }
     }
-   // 11.ImageSlider✅
+   // 11.ImageSlider✅✅
    passedItem.ImageSlider = function(opts = {}) {
     switch(opts.style || 1){
         case 1:
-            function ImageSlider(){
-                if(opts.height || opts.width){
+            function ImageSlider(element){
+                element.classList.add("slider");
+                const slider = element;
+        
+                // Set width and height if provided
+                if (opts.height || opts.width) {
                     slider.style.width = opts.width;
                     slider.style.height = opts.height;
                 }
-                const slider = document.querySelector('.slider');
+        
+                // Initialize currentIndex
                 let currentIndex = 0;
-              
+        
                 // Function to initialize the slider with your own images
                 async function initSlider() {
-                  for (let i = 0; i < imageUrls.length; i++) {
-                    const slide = document.createElement('div');
-                    slide.classList.add('slide');
-                    slide.style.backgroundImage = `url('${imageUrls[i]}')`;
-                    slider.appendChild(slide);
-                  }
+                    for (let i = 0; i < imageUrls.length; i++) {
+                        const slide = document.createElement('div');
+                        slide.classList.add('slide');
+                        slide.style.backgroundImage = `url('${imageUrls[i]}')`;
+                        slider.appendChild(slide);
+                    }
                 }
-              
+        
                 // Function to navigate to the previous slide
                 function prevSlide() {
-                  if (currentIndex > 0) {
-                    currentIndex--;
-                    moveSlider();
-                  }
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        moveSlider();
+                    }
                 }
-              
+        
                 // Function to navigate to the next slide
                 function nextSlide() {
-                  if (currentIndex < slider.children.length - 1) {
-                    currentIndex++;
-                    moveSlider();
-                  }
+                    if (currentIndex < slider.children.length - 1) {
+                        currentIndex++;
+                        moveSlider();
+                    }
                 }
-              
+        
                 // Function to move the slider to the current slide
                 function moveSlider() {
-                  gsap.to(slider, {
-                    x: -currentIndex * slider.offsetWidth,
-                    duration: 0.5,
-                    ease: 'power2.out'
-                  });
+                    gsap.to(slider, {
+                        x: -currentIndex * slider.offsetWidth,
+                        duration: 0.5,
+                        ease: 'power2.out'
+                    });
                 }
-              
+        
                 // Initialize the slider
                 initSlider();
+        
+                // Event listeners for navigation buttons
+                document.getElementById("prevBtn").addEventListener("click", prevSlide);
+                document.getElementById("nextBtn").addEventListener("click", nextSlide);
+        
+                return element;
             }
-           ImageSlider();
+            
+            // Call the ImageSlider function with passedItem
+            ImageSlider(passedItem);
            break;
         case 2: 
-           function SwiperJsSlider(){
-            var Myswiper = document.querySelector(".swiper");
-            var slide = document.querySelector(".swiper-slide")
-            if(opts.SwiperWidth || opts.SwiperHeight || opts.slideHeight || opts.slideWidth){
-                Myswiper.style.width = opts.SwiperWidth;
-                Myswiper.style.height = opts.SwiperHeight;
-                slide.style.width = opts.slideWidth;
-                slide.style.height = opts.slideHeight;
-            }
-            var swiper = new Swiper(".mySwiper", {
-                slidesPerView: "auto",
-                centeredSlides: opts.centeredSlides || true,
-                spaceBetween: opts.spaceBetween || 30,
-                autoplay: {
-                  delay: opts.delay || 2500,
-                  disableOnInteraction: opts.disableOnInteraction || false,
-                },
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: opts.clickable || true,
-                  },
-                navigation: {
-                  nextEl: ".swiper-button-next",
-                  prevEl: ".swiper-button-prev",
-                },
-              });
-            }
-            SwiperJsSlider()
+        console.log("sorry for inconvience this effect will be soon available to use")
+        // function SwiperJsSlider() {
+        //     // Retrieve swiper and slide elements
+        //     var Myswiper = document.querySelector(".swiper");
+        //     var slide = document.querySelector(".swiper-slide");
+        
+        //     // Check if the elements exist before applying styles
+        //     if (Myswiper && slide) {
+        //         // Set width and height if provided
+        //         if (opts.SwiperWidth || opts.SwiperHeight || opts.slideHeight || opts.slideWidth) {
+        //             Myswiper.style.width = opts.SwiperWidth;
+        //             Myswiper.style.height = opts.SwiperHeight;
+        //             slide.style.width = opts.slideWidth;
+        //             slide.style.height = opts.slideHeight;
+        //         }
+        
+        //         // Initialize Swiper
+        //         var swiper = new Swiper(".mySwiper", {
+        //             slidesPerView: "auto",
+        //             centeredSlides: opts.centeredSlides || true,
+        //             spaceBetween: opts.spaceBetween || 30,
+        //             autoplay: {
+        //                 delay: opts.delay || 2500,
+        //                 disableOnInteraction: opts.disableOnInteraction || false,
+        //             },
+        //             pagination: {
+        //                 el: ".swiper-pagination",
+        //                 clickable: opts.clickable || true,
+        //             },
+        //             navigation: {
+        //                 nextEl: ".swiper-button-next",
+        //                 prevEl: ".swiper-button-prev",
+        //             },
+        //         });
+        //     } else {
+        //         console.error("Swiper or slide element not found.");
+        //     }
+        // }
+        // SwiperJsSlider()
             break;
         default:
                 console.warn(
@@ -981,249 +1284,7 @@ function $(selector){
                   )
     }
     }
-    
+
 // Return passedItem for potential chaining
     return passedItem;
-}
-// QuerySelectorAll
-function _(AllSelector){
-    let passedItem = document.querySelector(AllSelector);
-    let queryPassed = document.querySelectorAll(AllSelector);
-     // 1.Text Effects✅
-    queryPassed.TextEffect = function(opts = {}){
-        switch (opts.style || 1) {
-            case 1:
-                function FirstEffect(elements) {
-                     elements.forEach((element) => {
-                        // Add or modify default/Custom styles as needed
-                        if (opts.color) {
-                            element.style.color = opts.color;
-                        }
-                        element.classList.add("rolling-text");
-        
-                        let innerText = element.innerText;
-                        element.innerHTML = "";
-        
-                        let textContainer = document.createElement("div");
-                        textContainer.classList.add("block");
-        
-                        for (let letter of innerText) {
-                            let span = document.createElement("span");
-                            span.innerText = letter.trim() === "" ? "\xa0" : letter;
-                            span.classList.add("letter");
-                            textContainer.appendChild(span);
-                        }
-        
-                        element.appendChild(textContainer);
-                        element.appendChild(textContainer.cloneNode(true));
-        
-                        element.addEventListener("mouseover", () => {
-                            element.classList.remove("play");
-                        });
-                    });
-        
-                return elements;
-                    }
-                 FirstEffect(queryPassed);
-              break
-            case 2:
-                function secondEffect(element){
-                    element.classList.add("magic")
-                    return element
-                }
-              secondEffect(passedItem)
-              break
-            case 3:
-                function ThirdEffect(element){
-                    if(opts.fontFamily || opts.fontSize || opts.TextTransform){
-                        element.style.fontSize = opts.fontSize;
-                        element.style.fontFamily = opts.fontFamily;
-                        element.style.textTransform = opts.TextTransform;
-                    }
-                    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                    element.classList.add("JText")
-                    element.onmouseover = event =>{
-                        let iterations = 0;
-                        const interval = setInterval(()=>{
-                            event.target.innerText = event.target.innerText.split("").map((letter, index) =>{
-                                if(index < iterations){
-                                    return event.target.dataset.value[index];
-                                } 
-                                return letters[Math.floor(Math.random() *  26)]}).join("");
-                            if(iterations >= event.target.dataset.value.length){
-                                clearInterval(interval)
-                            } 
-                            iterations += 1 / 3;
-                        },100);
-                        
-                    }                  
-                    return element
-                }
-              ThirdEffect(queryPassed)
-              break
-            case 4:
-                function fourthEffect(element){
-                    element.classList.add("txt-line")
-                    gsap.from(".txt-line",{
-                        duration: 1.8,
-                        delay: 1,
-                        y: 200,
-                        skewY: 10,
-                        stagger:{
-                            amount: .4
-                        }
-                    })                               
-                    return element
-                }
-              fourthEffect(passedItem)
-              break
-            case 5:
-                function fifthEffect(element){
-                    element.classList.add("TE5")
-                    gsap.to(".TE5 p",{
-                        backgroundPositionX: "0%",
-                        stagger:1,
-                        scrollTrigger:{
-                            trigger: ".TE5" || opts.trigger,
-                            scrub: 1,
-                            start: "top center",
-                            end: "bottom top"
-                        }
-                    })             
-                    return element
-                }
-              fifthEffect(passedItem)
-              break
-            case 6:
-                function SixthEffect(element){
-                 if(opts.fontSize){
-                    element.style.fontSize = opts.fontSize
-                 }
-                 element.classList.add("TE6")
-                    return element
-                }
-              SixthEffect(passedItem)
-              break
-            case 7:
-                function SeventhEffect(element){
-                    if(opts.fontFamily || opts.fontSize || opts.TextTransform){
-                        element.style.fontSize = opts.fontSize;
-                        element.style.fontFamily = opts.fontFamily;
-                        element.style.textTransform = opts.TextTransform;
-                    }
-                    var textContainer = document.createElement("div");
-                    textContainer.classList.add("TE7C");
-                    textContainer.appendChild(element)
-                    element.classList.add("TE7")
-                    return element
-                }
-              SeventhEffect(passedItem)
-              break
-            case 8:
-                function EighthEffect(element){
-                    if(opts.fontFamily || opts.fontSize || opts.TextTransform){
-                        element.style.fontSize = opts.fontSize;
-                        element.style.fontFamily = opts.fontFamily;
-                        element.style.textTransform = opts.TextTransform;
-                    }
-                 element.classList.add("textEffects");
-                 gsap.from(".textEffects",{
-                    y:100,
-                    opacity: 1,
-                    duration: 0.5,
-                    delay: 0.2,
-                    ease: "power2"
-                 })
-                    return element
-                }
-              EighthEffect(passedItem)
-              break
-            case 9:
-                function NinthEffect(element){
-                    if(opts.fontFamily || opts.fontSize || opts.TextTransform){
-                        element.style.fontSize = opts.fontSize;
-                        element.style.fontFamily = opts.fontFamily;
-                        element.style.textTransform = opts.TextTransform;
-                    }
-                    element.classList.add(typewriter)
-                    const typewriterText = document.querySelector(".typewriter").textContent;
-                    typewriterText.textContent = "";
-                    const chars = typewriterText.split("");
-                    chars.forEach((char, index) => {
-                      const span = document.createElement("span");
-                      span.textContent = char;
-                      span.style.visibility = "hidden";
-                      typewriterText.appendChild(span);
-                
-                      gsap.to(span, {
-                        visibility: "visible",
-                        duration: 0.5,
-                        delay: index * 0.1,
-                        onComplete: () => {
-                          if (index === chars.length - 1) {
-                            document.querySelector(".typewriter").style.borderRight = "none";
-                          }
-                        }
-                      });
-                    });
-                    return element
-                }
-              NinthEffect(passedItem)
-              break
-            default:
-              console.warn(
-                "Animox Js : no such style available for Text Effects, mentioned in TextEffect()"
-              )
-          }
-    }
-       // 2.Link Hover Effects✅
-    queryPassed.HoverEffect = function(opts = {}){
-        switch (opts.style || 1) {
-            case 1:
-                function FirstEffect(element) {
-                    element.classList.add("btnE1");
-                    element.classList.add("btnM1");
-                    if(opts.bgColor || opts.color || opts.width || opts.height){
-                        element.style.backgroundColor = opts.bgColor;
-                        element.style.color =  opts.color;
-                        element.style.width =  opts.width;
-                        element.style.height = opts.height;
-                    }
-                    return element;
-                    }
-                FirstEffect(queryPassed);
-              break
-            case 2:
-            function SecondEffect(element){
-                element.classList.add("btnE5");
-                if(opts.style == 2){
-                    switch(opts.effect || "center"){
-                        case "center":
-                            element.classList.add("btn-center")
-                        break
-                        case "left":
-                            element.classList.add("btn-left")
-                        break
-                        case "right":
-                            element.classList.add("btn-right")
-                        break
-                        case "bottom":
-                            element.classList.add("btn-bottom")
-                        break
-                    }
-                }
-                
-                return element;
-                    } 
-              SecondEffect(queryPassed)
-              break
-            default:
-              console.warn(
-                "Animox Js : no such style available for Hover Effect, mentioned in HoverEffect()"
-              )
-          }
-   
-    }
-    // Return passedItem for potential chaining
-    return queryPassed, passedItem;
 }
