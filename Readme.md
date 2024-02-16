@@ -279,7 +279,7 @@ Connect with him: [Harsh&#39;s Linkedin Profile](https://www.linkedin.com/in/har
 
 ## Demos
 
-For detailed usage examples and demos of each effect, check out the [demos]([/examples/](https://github.com/Ssaj525/Animox.js.demos)) directory in the Animox.js repository.
+For detailed usage examples and demos of each effect, check out the [demos]((https://github.com/Ssaj525/Animox.js.demos)) directory in the Animox.js repository.
 
 
 Connect with me: satauheed.business@gmail.com
